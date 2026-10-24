@@ -1,0 +1,43 @@
+
+services:
+  mongo1:
+    image: mongo:8.0
+    container_name: harvesthub-mongo1
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "127.0.0.1:27018:27017"
+    volumes:
+      - mongo1_data:/data/db
+    networks:
+      - harvesthub-net
+
+  mongo2:
+    image: mongo:8.0
+    container_name: harvesthub-mongo2
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "127.0.0.1:27019:27017"
+    volumes:
+      - mongo2_data:/data/db
+    networks:
+      - harvesthub-net
+
+  mongo3:
+    image: mongo:8.0
+    container_name: harvesthub-mongo3
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "127.0.0.1:27020:27017"
+    volumes:
+      - mongo3_data:/data/db
+    networks:
+      - harvesthub-net
+
+networks:
+  harvesthub-net:
+    driver: bridge
+
+volumes:
+  mongo1_data:
+  mongo2_data:
+  mongo3_data:
